@@ -1,4 +1,4 @@
-package com.example.vSIAF.controller;
+package com.example.vSIAF.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
