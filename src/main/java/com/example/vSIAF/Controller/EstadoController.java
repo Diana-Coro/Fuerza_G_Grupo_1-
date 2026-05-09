@@ -13,7 +13,7 @@ public class EstadoController {
 
     List<Estado> lista = new ArrayList<>();
 
-    // DATOS INICIALES
+
     public EstadoController() {
 
         lista.add(new Estado(1, "Bueno"));
@@ -21,13 +21,12 @@ public class EstadoController {
         lista.add(new Estado(3, "Malo"));
     }
 
-    // GET -> LISTAR
     @GetMapping
     public List<Estado> listar() {
         return lista;
     }
 
-    // GET POR ID
+
     @GetMapping("/{id}")
     public Estado buscar(@PathVariable Integer id) {
 
@@ -40,7 +39,7 @@ public class EstadoController {
         return null;
     }
 
-    // POST -> INSERTAR
+
     @PostMapping
     public Estado insertar(@RequestBody Estado estado) {
 
@@ -49,7 +48,7 @@ public class EstadoController {
         return estado;
     }
 
-    // PUT -> ACTUALIZAR
+
     @PutMapping("/{id}")
     public Estado actualizar(@PathVariable Integer id,
                              @RequestBody Estado nuevo) {
@@ -67,7 +66,7 @@ public class EstadoController {
         return null;
     }
 
-    // DELETE
+
     @DeleteMapping("/{id}")
     public String eliminar(@PathVariable Integer id) {
 
