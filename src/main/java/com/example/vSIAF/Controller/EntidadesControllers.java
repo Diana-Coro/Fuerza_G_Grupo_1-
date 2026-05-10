@@ -1,4 +1,4 @@
-package com.example.vSIAF.Controllers;
+package com.example.vSIAF.Controller;
 
 import com.example.vSIAF.Dtos.EntidadesDTO;
 import com.example.vSIAF.Services.EntidadesService;
