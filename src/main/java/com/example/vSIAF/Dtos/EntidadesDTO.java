@@ -1,4 +1,4 @@
-package com.example.vSIAF.dtos;
+package com.example.vSIAF.Dtos;
 
 public class EntidadesDTO {
 

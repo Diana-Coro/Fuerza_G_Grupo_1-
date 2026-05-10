@@ -1,7 +1,7 @@
-package com.example.vSIAF.controllers;
+package com.example.vSIAF.Controllers;
 
-import com.example.vSIAF.dtos.EntidadesDTO;
-import com.example.vSIAF.services.EntidadesService;
+import com.example.vSIAF.Dtos.EntidadesDTO;
+import com.example.vSIAF.Services.EntidadesService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

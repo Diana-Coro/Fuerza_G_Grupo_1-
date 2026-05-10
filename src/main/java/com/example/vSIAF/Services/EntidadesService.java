@@ -1,6 +1,6 @@
-package com.example.vSIAF.services;
+package com.example.vSIAF.Services;
 
-import com.example.vSIAF.dtos.EntidadesDTO;
+import com.example.vSIAF.Dtos.EntidadesDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
