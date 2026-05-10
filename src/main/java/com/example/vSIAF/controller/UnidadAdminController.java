@@ -1,5 +1,6 @@
 package com.example.vSIAF.controller;
 
+import com.example.vSIAF.model.UnidadAdmin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UnidadAdminController {
 
     @GetMapping("/unidadadmin")
-    public String unidadAdmin() {
-        return "Tabla UnidadAdmin funcionando";
+    public UnidadAdmin unidadAdmin() {
+        return new UnidadAdmin(1L, 1L, "Unidad administrativa", "Potosi");
     }
 }
