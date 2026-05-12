@@ -19,6 +19,7 @@ public class EntidadController {
 
     @GetMapping("/entidades/{entidad}")
     public Entidad getEntidadesByEntidad(@PathVariable long entidad) {
+
         return entidades.stream()
                 .filter(e -> e.getEntidad() == entidad)
                 .findFirst()
@@ -27,12 +28,15 @@ public class EntidadController {
 
     @PostMapping("/entidades")
     public Entidad postEntidades(@RequestBody Entidad nuevo) {
+
         entidades.add(nuevo);
+
         return nuevo;
     }
 
     @PutMapping("/entidades/{entidad}")
-    public Entidad putEntidades(@PathVariable long entidad, @RequestBody Entidad editado) {
+    public Entidad putEntidades(@PathVariable long entidad,
+                                @RequestBody Entidad editado) {
 
         Entidad temporal = entidades.stream()
                 .filter(e -> e.getEntidad() == entidad)
