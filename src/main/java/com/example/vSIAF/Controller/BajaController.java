@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@RestController
-//@RequestMapping("/api/baja")
+@RestController
+@RequestMapping("/api/baja")
 public class BajaController {
 
     private List<Baja> listaBajas = new ArrayList<>();
