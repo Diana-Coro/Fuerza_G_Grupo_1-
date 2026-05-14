@@ -17,23 +17,16 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	set('springBootAdminVersion', "4.0.3")
-}
-
 dependencies {
-implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-	implementation 'de.codecentric:spring-boot-admin-starter-client'
-	implementation 'de.codecentric:spring-boot-admin-starter-server'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testCompileOnly 'org.projectlombok:lombok'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
-	}
+	testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
