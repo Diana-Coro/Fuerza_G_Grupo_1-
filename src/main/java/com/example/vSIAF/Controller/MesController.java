@@ -30,7 +30,30 @@ public class MesController {
     }
 
     @GetMapping
-    public List<Mes> listar() {
+    public List<Mes> obtenerMeses() {
         return listaMeses;
+    }
+
+    @GetMapping("/{posicion}")
+    public Mes obtenerMesPorPosicion(@PathVariable int posicion) {
+        return listaMeses.get(posicion);
+    }
+
+    @PostMapping
+    public String agregarMes(@RequestBody Mes mes) {
+        listaMeses.add(mes);
+        return "Mes agregado correctamente";
+    }
+
+    @PutMapping("/{posicion}")
+    public String actualizarMes(@PathVariable int posicion, @RequestBody Mes mesActualizado) {
+        listaMeses.set(posicion, mesActualizado);
+        return "Mes actualizado correctamente";
+    }
+
+    @DeleteMapping("/{posicion}")
+    public String eliminarMes(@PathVariable int posicion) {
+        listaMeses.remove(posicion);
+        return "Mes eliminado correctamente";
     }
 }
