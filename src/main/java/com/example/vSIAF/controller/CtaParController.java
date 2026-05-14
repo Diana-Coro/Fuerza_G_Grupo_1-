@@ -1,4 +1,4 @@
-package Controller;
+package com.example.Cta_par.controller;
 
 import com.example.Cta_par.model.CtaPar;
 import org.springframework.web.bind.annotation.*;
