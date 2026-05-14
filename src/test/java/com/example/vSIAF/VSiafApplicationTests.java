@@ -1,10 +1,10 @@
-package com.example.Cta_par;
+package com.example.vSIAF;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CtaParApplicationTests {
+class VSiafApplicationTests {
 
 	@Test
 	void contextLoads() {
