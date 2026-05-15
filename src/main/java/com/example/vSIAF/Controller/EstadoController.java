@@ -12,7 +12,6 @@ public class EstadoController {
 
     List<Estado> lista = new ArrayList<>();
 
-    // DATOS INICIALES
     public EstadoController() {
 
         lista.add(new Estado(1, "Bueno"));

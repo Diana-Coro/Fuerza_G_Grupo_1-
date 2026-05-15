@@ -1,6 +1,8 @@
 package com.example.vSIAF.Controller;
 
 import com.example.vSIAF.model.Mes;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/mes")
+@Tag(name = "Mes API", description = "CRUD de la tabla Mes")
 public class MesController {
 
     private List<Mes> listaMeses = new ArrayList<>();
@@ -29,28 +32,48 @@ public class MesController {
 
     }
 
+    @Operation(
+            summary = "Lista de meses",
+            description = "Obtiene todos los meses registrados"
+    )
     @GetMapping
     public List<Mes> obtenerMeses() {
         return listaMeses;
     }
 
+    @Operation(
+            summary = "Buscar mes por posición",
+            description = "Obtiene un mes según su posición en la lista"
+    )
     @GetMapping("/{posicion}")
     public Mes obtenerMesPorPosicion(@PathVariable int posicion) {
         return listaMeses.get(posicion);
     }
 
+    @Operation(
+            summary = "Registrar mes",
+            description = "Agrega un nuevo mes al sistema"
+    )
     @PostMapping
     public String agregarMes(@RequestBody Mes mes) {
         listaMeses.add(mes);
         return "Mes agregado correctamente";
     }
 
+    @Operation(
+            summary = "Actualizar mes",
+            description = "Actualiza un mes existente"
+    )
     @PutMapping("/{posicion}")
     public String actualizarMes(@PathVariable int posicion, @RequestBody Mes mesActualizado) {
         listaMeses.set(posicion, mesActualizado);
         return "Mes actualizado correctamente";
     }
 
+    @Operation(
+            summary = "Eliminar mes",
+            description = "Elimina un mes de la lista"
+    )
     @DeleteMapping("/{posicion}")
     public String eliminarMes(@PathVariable int posicion) {
         listaMeses.remove(posicion);

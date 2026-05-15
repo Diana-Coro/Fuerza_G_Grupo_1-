@@ -1,6 +1,8 @@
 package com.example.vSIAF.Controller;
 
 import com.example.vSIAF.model.Entidad;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -8,15 +10,24 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Entidad API", description = "CRUD de la tabla Entidad")
 public class EntidadController {
 
     private final List<Entidad> entidades = new ArrayList<>();
 
+    @Operation(
+            summary = "Lista de entidades",
+            description = "Obtiene todas las entidades registradas"
+    )
     @GetMapping("/entidades")
     public List<Entidad> getEntidades() {
         return entidades;
     }
 
+    @Operation(
+            summary = "Buscar entidad por código",
+            description = "Obtiene una entidad específica mediante su código"
+    )
     @GetMapping("/entidades/{entidad}")
     public Entidad getEntidadesByEntidad(@PathVariable long entidad) {
 
@@ -26,6 +37,10 @@ public class EntidadController {
                 .orElse(null);
     }
 
+    @Operation(
+            summary = "Registrar entidad",
+            description = "Agrega una nueva entidad al sistema"
+    )
     @PostMapping("/entidades")
     public Entidad postEntidades(@RequestBody Entidad nuevo) {
 
@@ -34,6 +49,10 @@ public class EntidadController {
         return nuevo;
     }
 
+    @Operation(
+            summary = "Actualizar entidad",
+            description = "Modifica los datos de una entidad existente"
+    )
     @PutMapping("/entidades/{entidad}")
     public Entidad putEntidades(@PathVariable long entidad,
                                 @RequestBody Entidad editado) {
@@ -58,6 +77,10 @@ public class EntidadController {
         return temporal;
     }
 
+    @Operation(
+            summary = "Eliminar entidad",
+            description = "Elimina una entidad mediante su código"
+    )
     @DeleteMapping("/entidades/{entidad}")
     public Entidad deleteEntidades(@PathVariable long entidad) {
 
