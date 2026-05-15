@@ -2,15 +2,19 @@ package com.example.vSIAF.Controller;
 
 import com.example.vSIAF.model.Estado;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/api/estado")
+@RequestMapping("/api/estado")
+@Tag(name = "Estado API", description = "CRUD de la tabla Estado")
 public class EstadoController {
 
     List<Estado> lista = new ArrayList<>();
+
 
     public EstadoController() {
 
@@ -18,6 +22,7 @@ public class EstadoController {
         lista.add(new Estado(2, "Regular"));
         lista.add(new Estado(3, "Malo"));
     }
+
     @Operation(
             summary = "Lista de estados",
             description = "Todos los estados registrados"
@@ -26,6 +31,7 @@ public class EstadoController {
     public List<Estado> listar() {
         return lista;
     }
+
     @Operation(
             summary = "Buscar estado por ID",
             description = "Estado específico mediante un entero del 1 al 3 código"
@@ -41,6 +47,7 @@ public class EstadoController {
 
         return null;
     }
+
     @Operation(
             summary = "Insertar estado",
             description = "Guarda un nuevo estado en la lista"
