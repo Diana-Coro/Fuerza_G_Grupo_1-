@@ -1,11 +1,11 @@
 package com.example.vSIAF.Controller;
 
-import com.example.vSIAF.model.Mes;
+import com.example.vSIAF.entity.MesEntity;
+import com.example.vSIAF.service.MesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -13,23 +13,10 @@ import java.util.List;
 @Tag(name = "Mes API", description = "CRUD de la tabla Mes")
 public class MesController {
 
-    private List<Mes> listaMeses = new ArrayList<>();
+    private final MesService service;
 
-    public MesController() {
-
-        listaMeses.add(new Mes(1, "Enero"));
-        listaMeses.add(new Mes(2, "Febrero"));
-        listaMeses.add(new Mes(3, "Marzo"));
-        listaMeses.add(new Mes(4, "Abril"));
-        listaMeses.add(new Mes(5, "Mayo"));
-        listaMeses.add(new Mes(6, "Junio"));
-        listaMeses.add(new Mes(7, "Julio"));
-        listaMeses.add(new Mes(8, "Agosto"));
-        listaMeses.add(new Mes(9, "Septiembre"));
-        listaMeses.add(new Mes(10, "Octubre"));
-        listaMeses.add(new Mes(11, "Noviembre"));
-        listaMeses.add(new Mes(12, "Diciembre"));
-
+    public MesController(MesService service) {
+        this.service = service;
     }
 
     @Operation(
@@ -37,46 +24,47 @@ public class MesController {
             description = "Obtiene todos los meses registrados"
     )
     @GetMapping
-    public List<Mes> obtenerMeses() {
-        return listaMeses;
+    public List<MesEntity> obtenerMeses() {
+        return service.listar();
     }
 
     @Operation(
-            summary = "Buscar mes por posición",
-            description = "Obtiene un mes según su posición en la lista"
+            summary = "Buscar mes",
+            description = "Busca un mes por ID"
     )
-    @GetMapping("/{posicion}")
-    public Mes obtenerMesPorPosicion(@PathVariable int posicion) {
-        return listaMeses.get(posicion);
+    @GetMapping("/{id}")
+    public MesEntity obtenerMes(@PathVariable Integer id) {
+        return service.buscar(id);
     }
 
     @Operation(
             summary = "Registrar mes",
-            description = "Agrega un nuevo mes al sistema"
+            description = "Agrega un nuevo mes"
     )
     @PostMapping
-    public String agregarMes(@RequestBody Mes mes) {
-        listaMeses.add(mes);
-        return "Mes agregado correctamente";
+    public MesEntity agregarMes(@RequestBody MesEntity mes) {
+        return service.guardar(mes);
     }
 
     @Operation(
             summary = "Actualizar mes",
             description = "Actualiza un mes existente"
     )
-    @PutMapping("/{posicion}")
-    public String actualizarMes(@PathVariable int posicion, @RequestBody Mes mesActualizado) {
-        listaMeses.set(posicion, mesActualizado);
-        return "Mes actualizado correctamente";
+    @PutMapping("/{id}")
+    public MesEntity actualizarMes(@PathVariable Integer id,
+                                   @RequestBody MesEntity mes) {
+        return service.actualizar(id, mes);
     }
 
     @Operation(
             summary = "Eliminar mes",
-            description = "Elimina un mes de la lista"
+            description = "Elimina un mes"
     )
-    @DeleteMapping("/{posicion}")
-    public String eliminarMes(@PathVariable int posicion) {
-        listaMeses.remove(posicion);
+    @DeleteMapping("/{id}")
+    public String eliminarMes(@PathVariable Integer id) {
+
+        service.eliminar(id);
+
         return "Mes eliminado correctamente";
     }
 }
