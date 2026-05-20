@@ -1,94 +1,63 @@
 package com.example.vSIAF.Controller;
 
-import com.example.vSIAF.model.Estado;
+import com.example.vSIAF.entity.EstadoEntity;
+import com.example.vSIAF.service.EstadoService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/estado")
-@Tag(name = "Estado API", description = "CRUD de la tabla Estado")
 public class EstadoController {
 
-    List<Estado> lista = new ArrayList<>();
+    private final EstadoService service;
 
-
-    public EstadoController() {
-
-        lista.add(new Estado(1, "Bueno"));
-        lista.add(new Estado(2, "Regular"));
-        lista.add(new Estado(3, "Malo"));
+    public EstadoController(EstadoService service) {
+        this.service = service;
     }
 
-    @Operation(
-            summary = "Lista de estados",
-            description = "Todos los estados registrados"
-    )
+    @Operation(summary = "Listar estados")
     @GetMapping
-    public List<Estado> listar() {
-        return lista;
+    public List<EstadoEntity> listar() {
+        return service.listar();
     }
 
-    @Operation(
-            summary = "Buscar estado por ID",
-            description = "Estado específico mediante un entero del 1 al 3 código"
-    )
+    @Operation(summary = "Buscar estado por ID")
     @GetMapping("/{id}")
-    public Estado buscar(@PathVariable Integer id) {
-
-        for (Estado e : lista) {
-            if (e.getCodestado().equals(id)) {
-                return e;
-            }
-        }
-
-        return null;
+    public Optional<EstadoEntity> buscar(@PathVariable Integer id) {
+        return service.buscar(id);
     }
 
-    @Operation(
-            summary = "Insertar estado",
-            description = "Guarda un nuevo estado en la lista"
-    )
+    @Operation(summary = "Insertar estado")
     @PostMapping
-    public Estado insertar(@RequestBody Estado estado) {
-
-        lista.add(estado);
-
-        return estado;
+    public EstadoEntity guardar(@RequestBody EstadoEntity estado) {
+        return service.guardar(estado);
     }
 
-    @Operation(
-            summary = "Actualizar estado",
-            description = "Modifica el estado mediante su ID"
-    )
+    @Operation(summary = "Actualizar estado")
     @PutMapping("/{id}")
-    public Estado actualizar(@PathVariable Integer id,
-                             @RequestBody Estado nuevo) {
+    public EstadoEntity actualizar(@PathVariable Integer id, @RequestBody EstadoEntity nuevo) {
 
-        for (Estado e : lista) {
+        EstadoEntity estado = service.buscar(id).orElse(null);
 
-            if (e.getCodestado().equals(id)) {
+        if (estado != null) {
 
-                e.setNomestado(nuevo.getNomestado());
+            estado.setNombrestado(nuevo.getNombrestado());
 
-                return e;
-            }
+            return service.guardar(estado);
         }
 
         return null;
     }
 
-    @Operation(
-            summary = "Eliminar estado",
-            description = "Elimina el estado mediante su ID"
-    )
+    @Operation(summary = "Eliminar estado")
     @DeleteMapping("/{id}")
     public String eliminar(@PathVariable Integer id) {
 
-        lista.removeIf(e -> e.getCodestado().equals(id));
-        return "Eliminado";
+        service.eliminar(id);
+
+        return "Estado eliminado";
     }
 }
