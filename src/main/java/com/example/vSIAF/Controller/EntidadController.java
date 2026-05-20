@@ -1,96 +1,69 @@
 package com.example.vSIAF.Controller;
 
-import com.example.vSIAF.model.Entidad;
+import com.example.vSIAF.entity.EntidadEntity;
+import com.example.vSIAF.service.EntidadService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/entidad")
 @Tag(name = "Entidad API", description = "CRUD de la tabla Entidad")
 public class EntidadController {
 
-    private final List<Entidad> entidades = new ArrayList<>();
+    private final EntidadService service;
+
+
+    public EntidadController(EntidadService service) {
+        this.service = service;
+    }
 
     @Operation(
             summary = "Lista de entidades",
             description = "Obtiene todas las entidades registradas"
     )
-    @GetMapping("/entidades")
-    public List<Entidad> getEntidades() {
-        return entidades;
+    @GetMapping
+    public List<EntidadEntity> obtenerEntidades() {
+        return service.listar();
     }
 
     @Operation(
-            summary = "Buscar entidad por código",
-            description = "Obtiene una entidad específica mediante su código"
+            summary = "Buscar entidad",
+            description = "Busca una entidad por ID"
     )
-    @GetMapping("/entidades/{entidad}")
-    public Entidad getEntidadesByEntidad(@PathVariable long entidad) {
-
-        return entidades.stream()
-                .filter(e -> e.getEntidad() == entidad)
-                .findFirst()
-                .orElse(null);
+    @GetMapping("/{id}")
+    public EntidadEntity obtenerEntidad(@PathVariable long id) {
+        return service.buscar(id);
     }
 
     @Operation(
             summary = "Registrar entidad",
-            description = "Agrega una nueva entidad al sistema"
+            description = "Agrega una nueva entidad"
     )
-    @PostMapping("/entidades")
-    public Entidad postEntidades(@RequestBody Entidad nuevo) {
-
-        entidades.add(nuevo);
-
-        return nuevo;
+    @PostMapping
+    public EntidadEntity agregarEntidad(@RequestBody EntidadEntity entidad) {
+        return service.guardar(entidad);
     }
 
     @Operation(
             summary = "Actualizar entidad",
-            description = "Modifica los datos de una entidad existente"
+            description = "Actualiza una entidad existente"
     )
-    @PutMapping("/entidades/{entidad}")
-    public Entidad putEntidades(@PathVariable long entidad,
-                                @RequestBody Entidad editado) {
-
-        Entidad temporal = entidades.stream()
-                .filter(e -> e.getEntidad() == entidad)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("ENTIDAD NO ENCONTRADA"));
-
-        if (editado.getGestion() != 0)
-            temporal.setGestion(editado.getGestion());
-
-        if (editado.getEntidad() != 0)
-            temporal.setEntidad(editado.getEntidad());
-
-        if (editado.getDescripcion() != null)
-            temporal.setDescripcion(editado.getDescripcion());
-
-        if (editado.getSigla() != null)
-            temporal.setSigla(editado.getSigla());
-
-        return temporal;
+    @PutMapping("/{id}")
+    public EntidadEntity actualizarEntidad(@PathVariable long id,
+                                           @RequestBody EntidadEntity entidad) {
+        return service.actualizar(id, entidad);
     }
 
     @Operation(
             summary = "Eliminar entidad",
-            description = "Elimina una entidad mediante su código"
+            description = "Elimina una entidad"
     )
-    @DeleteMapping("/entidades/{entidad}")
-    public Entidad deleteEntidades(@PathVariable long entidad) {
-
-        Entidad temporal = entidades.stream()
-                .filter(e -> e.getEntidad() == entidad)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("ENTIDAD NO ENCONTRADA"));
-
-        entidades.remove(temporal);
-
-        return temporal;
+    @DeleteMapping("/{id}")
+    public String eliminarEntidad(@PathVariable long id) {
+        service.eliminar(id);
+        return "Entidad eliminada correctamente";
     }
 }
