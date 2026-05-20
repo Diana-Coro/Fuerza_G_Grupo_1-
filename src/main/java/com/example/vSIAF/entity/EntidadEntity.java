@@ -54,9 +54,7 @@ public class EntidadEntity {
         this.descripcion = descripcion;
     }
 
-    public String getSigla() {
-        return this.sigla;
-    }
+    public String getSigla() {return this.sigla;}
 
     public void setSigla(String sigla) {
         this.sigla = sigla;

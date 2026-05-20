@@ -10,7 +10,7 @@ public class EntidadService {
 
     private final EntidadRepository repository;
 
-    // Inyección por constructor igual que el código de tu grupo
+
     public EntidadService(EntidadRepository repository) {
         this.repository = repository;
     }

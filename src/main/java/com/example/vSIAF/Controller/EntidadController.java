@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/entidad") // URL base simplificada
+@RequestMapping("/api/entidad")
 @Tag(name = "Entidad API", description = "CRUD de la tabla Entidad")
 public class EntidadController {
 
     private final EntidadService service;
 
-    // Inyección por constructor limpia, sin @Autowired
+
     public EntidadController(EntidadService service) {
         this.service = service;
     }
@@ -64,6 +64,6 @@ public class EntidadController {
     @DeleteMapping("/{id}")
     public String eliminarEntidad(@PathVariable long id) {
         service.eliminar(id);
-        return "Entidad eliminada correctamente"; // Retorno de texto plano idéntico a Mes
+        return "Entidad eliminada correctamente";
     }
 }
