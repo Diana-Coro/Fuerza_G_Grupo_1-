@@ -1,10 +1,12 @@
- package com.example.vSIAF.entity;
+package com.example.vSIAF.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "ctapar")
@@ -12,6 +14,7 @@ public class CtaParEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer id;
     
     private Integer codcont;
@@ -30,6 +33,8 @@ public class CtaParEntity {
         return id;
     }
 
+    // Aquí está la magia para que Swagger no pida el ID al insertar
+    @JsonIgnore
     public void setId(Integer id) {
         this.id = id;
     }
