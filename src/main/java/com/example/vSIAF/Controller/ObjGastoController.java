@@ -1,23 +1,23 @@
 package com.example.vSIAF.Controller;
 
-import com.example.vSIAF.entity.ObjGastoEntity;
-import com.example.vSIAF.service.ObjGastoService;
+import com.example.vSIAF.model.ObjGasto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/objgasto")
-@CrossOrigin(origins = "*")
-@Tag(name = "ObjGasto API", description = "CRUD de la tabla ObjGasto")
+@Tag(name = "ObjGasto API", description = "CRUD de la tabla Objeto Gasto")
 public class ObjGastoController {
 
-    private final ObjGastoService service;
+    private List<ObjGasto> listaObjGasto = new ArrayList<>();
 
-    public ObjGastoController(ObjGastoService service) {
-        this.service = service;
+    public ObjGastoController() {
+
+        listaObjGasto.add(new ObjGasto(0, "41100", "Edificios"));
     }
 
     @Operation(
@@ -31,39 +31,47 @@ public class ObjGastoController {
 
     @Operation(
             summary = "Buscar objeto de gasto",
-            description = "Busca un objeto de gasto por partida"
+            description = "Obtiene un objeto de gasto mediante su posición"
     )
-    @GetMapping("/{partida}")
-    public ObjGastoEntity obtenerObjGasto(@PathVariable String partida) {
-        return service.buscar(partida);
+    @GetMapping("/{posicion}")
+    public ObjGasto obtenerObjGastoPorPosicion(@PathVariable int posicion) {
+        return listaObjGasto.get(posicion);
     }
 
     @Operation(
             summary = "Registrar objeto de gasto",
-            description = "Agrega un nuevo objeto de gasto"
+            description = "Agrega un nuevo objeto de gasto al sistema"
     )
     @PostMapping
-    public ObjGastoEntity agregarObjGasto(@RequestBody ObjGastoEntity objGasto) {
-        return service.guardar(objGasto);
+    public String agregarObjGasto(@RequestBody ObjGasto objGasto) {
+
+        listaObjGasto.add(objGasto);
+
+        return "Objeto de gasto agregado correctamente";
     }
 
     @Operation(
             summary = "Actualizar objeto de gasto",
-            description = "Actualiza un objeto de gasto existente"
+            description = "Modifica un objeto de gasto existente"
     )
-    @PutMapping("/{partida}")
-    public ObjGastoEntity actualizarObjGasto(@PathVariable String partida,
-                                              @RequestBody ObjGastoEntity objGasto) {
-        return service.actualizar(partida, objGasto);
+    @PutMapping("/{posicion}")
+    public String actualizarObjGasto(@PathVariable int posicion,
+                                     @RequestBody ObjGasto objGastoActualizado) {
+
+        listaObjGasto.set(posicion, objGastoActualizado);
+
+        return "Objeto de gasto actualizado correctamente";
     }
 
     @Operation(
             summary = "Eliminar objeto de gasto",
-            description = "Elimina un objeto de gasto"
+            description = "Elimina un objeto de gasto de la lista"
     )
-    @DeleteMapping("/{partida}")
-    public String eliminarObjGasto(@PathVariable String partida) {
-        service.eliminar(partida);
+    @DeleteMapping("/{posicion}")
+    public String eliminarObjGasto(@PathVariable int posicion) {
+
+        listaObjGasto.remove(posicion);
+
         return "Objeto de gasto eliminado correctamente";
     }
 }
