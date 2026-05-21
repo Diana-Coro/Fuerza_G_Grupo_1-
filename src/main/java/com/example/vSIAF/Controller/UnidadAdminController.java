@@ -19,37 +19,25 @@ public class UnidadAdminController {
         this.service = service;
     }
 
-    @Operation(
-            summary = "Lista de unidades administrativas",
-            description = "Obtiene todas las unidades administrativas registradas"
-    )
+    @Operation(summary = "Lista de unidades administrativas")
     @GetMapping
     public List<UnidadAdminEntity> listar() {
         return service.listar();
     }
 
-    @Operation(
-            summary = "Buscar unidad administrativa",
-            description = "Obtiene una unidad administrativa mediante su código"
-    )
+    @Operation(summary = "Buscar unidad administrativa por código")
     @GetMapping("/{unidad}")
     public UnidadAdminEntity buscar(@PathVariable Long unidad) {
         return service.buscar(unidad);
     }
 
-    @Operation(
-            summary = "Registrar unidad administrativa",
-            description = "Registra una nueva unidad administrativa"
-    )
+    @Operation(summary = "Registrar unidad administrativa")
     @PostMapping
     public UnidadAdminEntity crear(@RequestBody UnidadAdminEntity unidadAdmin) {
         return service.crear(unidadAdmin);
     }
 
-    @Operation(
-            summary = "Actualizar unidad administrativa",
-            description = "Modifica una unidad administrativa existente"
-    )
+    @Operation(summary = "Actualizar unidad administrativa")
     @PutMapping("/{unidad}")
     public UnidadAdminEntity actualizar(
             @PathVariable Long unidad,
@@ -58,10 +46,7 @@ public class UnidadAdminController {
         return service.actualizar(unidad, unidadAdmin);
     }
 
-    @Operation(
-            summary = "Eliminar unidad administrativa",
-            description = "Elimina una unidad administrativa mediante su código"
-    )
+    @Operation(summary = "Eliminar unidad administrativa")
     @DeleteMapping("/{unidad}")
     public String eliminar(@PathVariable Long unidad) {
         return service.eliminar(unidad);
