@@ -1,11 +1,11 @@
 package com.example.vSIAF.Controller;
 
-import com.example.vSIAF.model.UnidadAdmin;
+import com.example.vSIAF.entity.UnidadAdminEntity;
+import com.example.vSIAF.service.UnidadAdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -13,14 +13,10 @@ import java.util.List;
 @Tag(name = "UnidadAdmin API", description = "CRUD de la tabla Unidad Administrativa")
 public class UnidadAdminController {
 
-    private final List<UnidadAdmin> unidades = new ArrayList<>();
+    private final UnidadAdminService service;
 
-    public UnidadAdminController() {
-
-        unidades.add(
-                new UnidadAdmin(1L, 1L,
-                        "Unidad administrativa", "Potosi")
-        );
+    public UnidadAdminController(UnidadAdminService service) {
+        this.service = service;
     }
 
     @Operation(
@@ -28,8 +24,8 @@ public class UnidadAdminController {
             description = "Obtiene todas las unidades administrativas registradas"
     )
     @GetMapping
-    public List<UnidadAdmin> listar() {
-        return unidades;
+    public List<UnidadAdminEntity> listar() {
+        return service.listar();
     }
 
     @Operation(
@@ -37,24 +33,17 @@ public class UnidadAdminController {
             description = "Obtiene una unidad administrativa mediante su código"
     )
     @GetMapping("/{unidad}")
-    public UnidadAdmin buscar(@PathVariable Long unidad) {
-
-        return unidades.stream()
-                .filter(item -> item.getUnidad().equals(unidad))
-                .findFirst()
-                .orElse(null);
+    public UnidadAdminEntity buscar(@PathVariable Long unidad) {
+        return service.buscar(unidad);
     }
 
     @Operation(
             summary = "Registrar unidad administrativa",
-            description = "Agrega una nueva unidad administrativa"
+            description = "Registra una nueva unidad administrativa"
     )
     @PostMapping
-    public UnidadAdmin crear(@RequestBody UnidadAdmin unidadAdmin) {
-
-        unidades.add(unidadAdmin);
-
-        return unidadAdmin;
+    public UnidadAdminEntity crear(@RequestBody UnidadAdminEntity unidadAdmin) {
+        return service.crear(unidadAdmin);
     }
 
     @Operation(
@@ -62,23 +51,11 @@ public class UnidadAdminController {
             description = "Modifica una unidad administrativa existente"
     )
     @PutMapping("/{unidad}")
-    public UnidadAdmin actualizar(@PathVariable Long unidad,
-                                  @RequestBody UnidadAdmin unidadAdmin) {
-
-        for (UnidadAdmin item : unidades) {
-
-            if (item.getUnidad().equals(unidad)) {
-
-                item.setEntidad(unidadAdmin.getEntidad());
-                item.setUnidad(unidadAdmin.getUnidad());
-                item.setDescrip(unidadAdmin.getDescrip());
-                item.setCiudad(unidadAdmin.getCiudad());
-
-                return item;
-            }
-        }
-
-        return null;
+    public UnidadAdminEntity actualizar(
+            @PathVariable Long unidad,
+            @RequestBody UnidadAdminEntity unidadAdmin
+    ) {
+        return service.actualizar(unidad, unidadAdmin);
     }
 
     @Operation(
@@ -87,9 +64,6 @@ public class UnidadAdminController {
     )
     @DeleteMapping("/{unidad}")
     public String eliminar(@PathVariable Long unidad) {
-
-        unidades.removeIf(item -> item.getUnidad().equals(unidad));
-
-        return "UnidadAdmin eliminada correctamente";
+        return service.eliminar(unidad);
     }
 }

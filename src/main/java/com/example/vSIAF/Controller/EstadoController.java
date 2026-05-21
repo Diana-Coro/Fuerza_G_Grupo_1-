@@ -3,6 +3,7 @@ package com.example.vSIAF.Controller;
 import com.example.vSIAF.entity.EstadoEntity;
 import com.example.vSIAF.service.EstadoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/estado")
+@Tag(name = "Estado API", description = "CRUD de la tabla Estado")
 public class EstadoController {
 
     private final EstadoService service;
