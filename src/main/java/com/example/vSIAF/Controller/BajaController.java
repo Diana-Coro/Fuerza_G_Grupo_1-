@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/baja")
-@Tag(name = "Baja API", description = "CRUD de la tabla Baja")
+@Tag(name = "API DE BAJAS", description = "CRUD de la tabla Baja")
 public class BajaController {
 
     private final BajaService service;
@@ -19,52 +19,41 @@ public class BajaController {
         this.service = service;
     }
 
-    @Operation(
-            summary = "Lista de bajas",
-            description = "Obtiene todas las bajas registradas"
-    )
+    @Operation(summary = "Listar Baja",
+            description = "Obtiene todos los registros de baja")
     @GetMapping
     public List<BajaEntity> obtenerBajas() {
         return service.listar();
     }
 
-    @Operation(
-            summary = "Buscar baja",
-            description = "Busca una baja por ID"
-    )
+    @Operation(summary = "Obtener Baja por id",
+            description = "Busca una baja específica utilizando su código 'codbaja'")
     @GetMapping("/{id}")
-    public BajaEntity obtenerBaja(@PathVariable Long id) {
+    public BajaEntity obtenerBaja(@PathVariable Integer id) {
         return service.buscar(id);
     }
 
-    @Operation(
-            summary = "Registrar baja",
-            description = "Agrega una nueva baja"
-    )
+    @Operation(summary = "Registrar nueva Baja",
+            description = "Agrega un nuevo regidtro de baja al sistema")
     @PostMapping
     public BajaEntity agregarBaja(@RequestBody BajaEntity baja) {
         return service.guardar(baja);
     }
 
     @Operation(
-            summary = "Actualizar baja",
-            description = "Actualiza una baja existente"
+            summary = "Actualizar Baja por id",
+            description = "Busca el registro mediante el id(codbaja)"
     )
     @PutMapping("/{id}")
-    public BajaEntity actualizarBaja(@PathVariable Long id,
-                                     @RequestBody BajaEntity baja) {
+    public BajaEntity actualizarBaja(@PathVariable Integer id, @RequestBody BajaEntity baja) {
         return service.actualizar(id, baja);
     }
 
-    @Operation(
-            summary = "Eliminar baja",
-            description = "Elimina una baja"
-    )
+    @Operation(summary = "Eliminar Baja por id",
+            description = "Borra un registro de baja de forma permanente")
     @DeleteMapping("/{id}")
-    public String eliminarBaja(@PathVariable Long id) {
-
+    public String eliminarBaja(@PathVariable Integer id) {
         service.eliminar(id);
-
-        return "Baja de registro eliminada correctamente";
+        return "Baja eliminada correctamente";
     }
 }

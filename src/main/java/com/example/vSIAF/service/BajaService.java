@@ -19,7 +19,7 @@ public class BajaService {
         return repository.findAll();
     }
 
-    public BajaEntity buscar(Long id) {
+    public BajaEntity buscar(Integer id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -27,20 +27,18 @@ public class BajaService {
         return repository.save(baja);
     }
 
-    public BajaEntity actualizar(Long id, BajaEntity bajaActualizada) {
+    public BajaEntity actualizar(Integer id, BajaEntity bajaActualizada) {
         BajaEntity baja = repository.findById(id).orElse(null);
 
         if (baja != null) {
-            if (bajaActualizada.getDesbaja() != null) {
-                baja.setDesbaja(bajaActualizada.getDesbaja());
-            }
+            baja.setDesbaja(bajaActualizada.getDesbaja());
             return repository.save(baja);
         }
 
         return null;
     }
 
-    public void eliminar(Long id) {
+    public void eliminar(Integer id) {
         repository.deleteById(id);
     }
 }
