@@ -1,16 +1,25 @@
-package com.example.vSIAF.model;
+package com.example.vSIAF.entity;
 
-public class UnidadAdmin {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "unidadadmin")
+public class UnidadadminEntity {
 
     private Long entidad;
+
+    @Id
     private Long unidad;
+
     private String descrip;
     private String ciudad;
 
-    public UnidadAdmin() {
+    public UnidadadminEntity() {
     }
 
-    public UnidadAdmin(Long entidad, Long unidad, String descrip, String ciudad) {
+    public UnidadadminEntity(Long entidad, Long unidad, String descrip, String ciudad) {
         this.entidad = entidad;
         this.unidad = unidad;
         this.descrip = descrip;
