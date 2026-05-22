@@ -6,6 +6,7 @@ import com.example.vSIAF.service.MesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/mes")
-@CrossOrigin(origins = "*")
+@Tag(name = "Mes API", description = "CRUD de la tabla Mes")
 public class MesController {
 
     @Autowired
