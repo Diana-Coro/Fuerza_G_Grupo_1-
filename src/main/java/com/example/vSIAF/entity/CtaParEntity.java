@@ -1,39 +1,35 @@
-package com.example.vSIAF.model;
+package com.example.vSIAF.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CtaPar {
+@Entity
+@Table(name = "Cta_par")
+public class CtaParEntity {
 
-    private Integer id;
-
-    @JsonProperty("Codcont") 
-    private Integer codcont;
-
-    @JsonProperty("Partida") 
-    private Integer partida;
-
-    @JsonProperty("Gestion") 
-    private Integer gestion;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Codcont")
+    @JsonProperty("Codcont")
+    @Schema(hidden = true) // Lo oculta del JSON de ejemplo de inserción en Swagger
+    private Integer codcont; 
     
-    public CtaPar() {
+    @Column(name = "Partida")
+    @JsonProperty("Partida") 
+    private Integer partida; 
+
+    @Column(name = "Gestion")
+    @JsonProperty("Gestion") 
+    private Integer gestion; 
+
+    public CtaParEntity() {
     }
 
-    
-    public CtaPar(Integer id, Integer codcont, Integer partida, Integer gestion) {
-        this.id = id;
+    public CtaParEntity(Integer codcont, Integer partida, Integer gestion) {
         this.codcont = codcont;
         this.partida = partida;
         this.gestion = gestion;
-    }
-
-    // Getters y Setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getCodcont() {
