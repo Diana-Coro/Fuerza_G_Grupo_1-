@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "estado")
+@Table(name = "Estado")
 public class EstadoEntity {
 
     @Id
@@ -12,14 +12,14 @@ public class EstadoEntity {
     @Schema(hidden = true)
     private Integer codestado;
 
-    private String nombrestado;
+    private String nomestado;
 
     public EstadoEntity() {
     }
 
-    public EstadoEntity(Integer codestado, String nombrestado) {
+    public EstadoEntity(Integer codestado, String nomestado) {
         this.codestado = codestado;
-        this.nombrestado = nombrestado;
+        this.nomestado = nomestado;
     }
 
     public Integer getCodestado() {
@@ -30,11 +30,11 @@ public class EstadoEntity {
         this.codestado = codestado;
     }
 
-    public String getNombrestado() {
-        return nombrestado;
+    public String getNomestado() {
+        return nomestado;
     }
 
-    public void setNombrestado(String nombrestado) {
-        this.nombrestado = nombrestado;
+    public void setNomestado(String nomestado) {
+        this.nomestado = nomestado;
     }
 }
