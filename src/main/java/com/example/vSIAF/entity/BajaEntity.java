@@ -8,6 +8,7 @@ public class BajaEntity {
 
     @Id
     private Integer codbaja;
+    
 
     private String desbaja;
 

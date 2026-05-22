@@ -2,6 +2,7 @@ package com.example.vSIAF.service;
 
 import com.example.vSIAF.entity.MesEntity;
 import com.example.vSIAF.repository.MesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,36 +10,33 @@ import java.util.List;
 @Service
 public class MesService {
 
-    private final MesRepository repository;
-
-    public MesService(MesRepository repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private MesRepository mesRepository;
 
     public List<MesEntity> listar() {
-        return repository.findAll();
+        return mesRepository.findAll();
     }
 
-    public MesEntity buscar(Integer id) {
-        return repository.findById(id).orElse(null);
+    public MesEntity buscarPorId(Integer id) {
+        return mesRepository.findById(id).orElse(null);
     }
 
     public MesEntity guardar(MesEntity mes) {
-        return repository.save(mes);
+        return mesRepository.save(mes);
     }
 
-    public MesEntity actualizar(Integer id, MesEntity mesActualizado) {
-        MesEntity mes = repository.findById(id).orElse(null);
+    public MesEntity actualizar(Integer id, MesEntity mes) {
+        MesEntity existente = mesRepository.findById(id).orElse(null);
 
-        if (mes != null) {
-            mes.setNommes(mesActualizado.getNommes());
-            return repository.save(mes);
+        if (existente != null) {
+            existente.setNommes(mes.getNommes());
+            return mesRepository.save(existente);
         }
 
         return null;
     }
 
     public void eliminar(Integer id) {
-        repository.deleteById(id);
+        mesRepository.deleteById(id);
     }
 }
