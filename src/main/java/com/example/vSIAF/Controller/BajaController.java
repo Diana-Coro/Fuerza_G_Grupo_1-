@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/baja")
-@Tag(name = "API DE BAJAS", description = "CRUD de la tabla Baja")
+@Tag(name = "Bajas API ", description = "CRUD de la tabla Baja")
 public class BajaController {
 
     private final BajaService service;
