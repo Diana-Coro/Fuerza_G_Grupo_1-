@@ -11,16 +11,18 @@ public class CtaParEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Codcont")
-    @JsonProperty("Codcont")
-    @Schema(hidden = true) // Lo oculta del JSON de ejemplo de inserción en Swagger
+    @JsonProperty(value = "Codcont", access = JsonProperty.Access.READ_ONLY)
+    @Schema(description = "Identificador único autoincrementable", accessMode = Schema.AccessMode.READ_ONLY)
     private Integer codcont; 
     
     @Column(name = "Partida")
     @JsonProperty("Partida") 
+    @Schema(description = "Número de partida presupuestaria", example = "11700")
     private Integer partida; 
 
     @Column(name = "Gestion")
     @JsonProperty("Gestion") 
+    @Schema(description = "Año de la gestión", example = "2026")
     private Integer gestion; 
 
     public CtaParEntity() {
