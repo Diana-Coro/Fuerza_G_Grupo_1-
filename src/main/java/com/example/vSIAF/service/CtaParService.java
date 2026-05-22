@@ -5,6 +5,7 @@ import com.example.vSIAF.repository.CtaParRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CtaParService {
@@ -19,8 +20,8 @@ public class CtaParService {
         return repository.findAll();
     }
 
-    public CtaParEntity buscar(Integer id) {
-        return repository.findById(id).orElse(null);
+    public Optional<CtaParEntity> buscar(Integer id) {
+        return repository.findById(id);
     }
 
     public CtaParEntity guardar(CtaParEntity ctapar) {
@@ -31,8 +32,7 @@ public class CtaParService {
         CtaParEntity ctapar = repository.findById(id).orElse(null);
 
         if (ctapar != null) {
-            // Actualizamos los campos específicos de CtaPar
-            ctapar.setCodcont(ctaparActualizado.getCodcont());
+            ctapar.setPartida(ctaparActualizado.getPartida());
             ctapar.setGestion(ctaparActualizado.getGestion());
             return repository.save(ctapar);
         }
