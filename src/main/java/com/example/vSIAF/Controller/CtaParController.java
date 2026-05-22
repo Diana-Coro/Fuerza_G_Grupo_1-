@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/ctapar")
+@RequestMapping("/api/Cta_par")
 
-@Tag(name = "CtaPar API", description = "CRUD de la tabla Cuenta Partida") 
+@Tag(name = "Cta_par API", description = "CRUD de la tabla Cuenta Partida") 
 public class CtaParController {
 
     private final CtaParService service;
@@ -26,10 +26,10 @@ public class CtaParController {
         return service.listar();
     }
 
-    @Operation(summary = "Buscar cuenta partida por ID")
-    @GetMapping("/{id}")
-    public CtaParEntity buscar(@PathVariable Integer id) {
-        return service.buscar(id);
+    @Operation(summary = "Buscar cuenta partida por Codcont")
+    @GetMapping("/{Codcont}")
+    public CtaParEntity buscar(@PathVariable Integer Codcont) {
+        return service.buscar(Codcont);
     }
 
     @Operation(summary = "Registrar cuenta partida")
@@ -39,15 +39,15 @@ public class CtaParController {
     }
 
     @Operation(summary = "Actualizar cuenta partida")
-    @PutMapping("/{id}")
-    public CtaParEntity actualizar(@PathVariable Integer id, @RequestBody CtaParEntity nuevo) {
-        return service.actualizar(id, nuevo);
+    @PutMapping("/{Codcont}")
+    public CtaParEntity actualizar(@PathVariable Integer Codcont, @RequestBody CtaParEntity nuevo) {
+        return service.actualizar(Codcont, nuevo);
     }
 
     @Operation(summary = "Eliminar cuenta partida")
-    @DeleteMapping("/{id}")
-    public String eliminar(@PathVariable Integer id) {
-        service.eliminar(id);
+    @DeleteMapping("/{Codcont}")
+    public String eliminar(@PathVariable Integer Codcont) {
+        service.eliminar(Codcont);
         return "Eliminado";
     }
 }
