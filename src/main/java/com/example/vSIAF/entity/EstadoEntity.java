@@ -4,37 +4,37 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "estado")
+@Table(name = "Estado")
 public class EstadoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(hidden = true)
-    private Integer codestado;
+    private Integer Codestado;
 
-    private String nombrestado;
+    private String Nomestado;
 
     public EstadoEntity() {
     }
 
-    public EstadoEntity(Integer codestado, String nombrestado) {
-        this.codestado = codestado;
-        this.nombrestado = nombrestado;
+    public EstadoEntity(Integer Codestado, String Nomestado) {
+        this.Codestado = Codestado;
+        this.Nomestado = Nomestado;
     }
 
     public Integer getCodestado() {
-        return codestado;
+        return Codestado;
     }
 
-    public void setCodestado(Integer codestado) {
-        this.codestado = codestado;
+    public void setCodestado(Integer Codestado) {
+        this.Codestado = Codestado;
     }
 
-    public String getNombrestado() {
-        return nombrestado;
+    public String getNomestado() {
+        return Nomestado;
     }
 
-    public void setNombrestado(String nombrestado) {
-        this.nombrestado = nombrestado;
+    public void setNomestado(String Nomestado) {
+        this.Nomestado = Nomestado;
     }
 }
