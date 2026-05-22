@@ -1,34 +1,34 @@
 package com.example.vSIAF.service;
 
-import com.example.vSIAF.entity.UnidadAdminEntity;
-import com.example.vSIAF.repository.UnidadAdminRepository;
+import com.example.vSIAF.entity.UnidadadminEntity;
+import com.example.vSIAF.repository.UnidadadminRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UnidadAdminService {
+public class UnidadadminService {
 
-    private final UnidadAdminRepository repository;
+    private final UnidadadminRepository repository;
 
-    public UnidadAdminService(UnidadAdminRepository repository) {
+    public UnidadadminService(UnidadadminRepository repository) {
         this.repository = repository;
     }
 
-    public List<UnidadAdminEntity> listar() {
+    public List<UnidadadminEntity> listar() {
         return repository.findAll();
     }
 
-    public UnidadAdminEntity buscar(Long unidad) {
+    public UnidadadminEntity buscar(Long unidad) {
         return repository.findById(unidad).orElse(null);
     }
 
-    public UnidadAdminEntity crear(UnidadAdminEntity unidadAdmin) {
+    public UnidadadminEntity crear(UnidadadminEntity unidadAdmin) {
         return repository.save(unidadAdmin);
     }
 
-    public UnidadAdminEntity actualizar(Long unidad, UnidadAdminEntity unidadAdmin) {
-        UnidadAdminEntity existente = repository.findById(unidad).orElse(null);
+    public UnidadadminEntity actualizar(Long unidad, UnidadadminEntity unidadAdmin) {
+        UnidadadminEntity existente = repository.findById(unidad).orElse(null);
 
         if (existente == null) {
             return null;

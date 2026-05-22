@@ -1,7 +1,7 @@
 package com.example.vSIAF.Controller;
 
-import com.example.vSIAF.entity.UnidadAdminEntity;
-import com.example.vSIAF.service.UnidadAdminService;
+import com.example.vSIAF.entity.UnidadadminEntity;
+import com.example.vSIAF.service.UnidadadminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/unidadadmin")
 @Tag(name = "UnidadAdmin API", description = "CRUD de la tabla Unidad Administrativa")
-public class UnidadAdminController {
+public class UnidadadminController {
 
-    private final UnidadAdminService service;
+    private final UnidadadminService service;
 
-    public UnidadAdminController(UnidadAdminService service) {
+    public UnidadadminController(UnidadadminService service) {
         this.service = service;
     }
 
@@ -24,7 +24,7 @@ public class UnidadAdminController {
             description = "Obtiene todas las unidades administrativas registradas"
     )
     @GetMapping
-    public List<UnidadAdminEntity> listar() {
+    public List<UnidadadminEntity> listar() {
         return service.listar();
     }
 
@@ -33,7 +33,7 @@ public class UnidadAdminController {
             description = "Obtiene una unidad administrativa mediante su código"
     )
     @GetMapping("/{unidad}")
-    public UnidadAdminEntity buscar(@PathVariable Long unidad) {
+    public UnidadadminEntity buscar(@PathVariable Long unidad) {
         return service.buscar(unidad);
     }
 
@@ -42,7 +42,7 @@ public class UnidadAdminController {
             description = "Registra una nueva unidad administrativa"
     )
     @PostMapping
-    public UnidadAdminEntity crear(@RequestBody UnidadAdminEntity unidadAdmin) {
+    public UnidadadminEntity crear(@RequestBody UnidadadminEntity unidadAdmin) {
         return service.crear(unidadAdmin);
     }
 
@@ -51,9 +51,9 @@ public class UnidadAdminController {
             description = "Modifica una unidad administrativa existente"
     )
     @PutMapping("/{unidad}")
-    public UnidadAdminEntity actualizar(
+    public UnidadadminEntity actualizar(
             @PathVariable Long unidad,
-            @RequestBody UnidadAdminEntity unidadAdmin
+            @RequestBody UnidadadminEntity unidadAdmin
     ) {
         return service.actualizar(unidad, unidadAdmin);
     }
