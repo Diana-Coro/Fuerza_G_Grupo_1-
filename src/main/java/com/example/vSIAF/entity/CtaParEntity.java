@@ -1,13 +1,8 @@
 package com.example.vSIAF.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Cta_par")
@@ -16,7 +11,8 @@ public class CtaParEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Codcont")
-    @JsonProperty(value = "Codcont", access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty("Codcont")
+    @Schema(hidden = true) // Lo oculta del JSON de ejemplo de inserción en Swagger
     private Integer codcont; 
     
     @Column(name = "Partida")
@@ -40,7 +36,6 @@ public class CtaParEntity {
         return codcont;
     }
 
-    @JsonIgnore
     public void setCodcont(Integer codcont) {
         this.codcont = codcont;
     }
