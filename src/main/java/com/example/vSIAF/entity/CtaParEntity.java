@@ -3,48 +3,54 @@ package com.example.vSIAF.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "ctapar")
+@Table(name = "Cta_par")
 public class CtaParEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Integer id;
+    @Column(name = "Codcont")
+    @JsonProperty(value = "Codcont", access = JsonProperty.Access.READ_ONLY)
+    private Integer codcont; 
     
-    private Integer codcont;
-    private Integer gestion;
+    @Column(name = "Partida")
+    @JsonProperty("Partida") 
+    private Integer partida; 
+
+    @Column(name = "Gestion")
+    @JsonProperty("Gestion") 
+    private Integer gestion; 
 
     public CtaParEntity() {
     }
 
-    public CtaParEntity(Integer id, Integer codcont, Integer gestion) {
-        this.id = id;
+    public CtaParEntity(Integer codcont, Integer partida, Integer gestion) {
         this.codcont = codcont;
+        this.partida = partida;
         this.gestion = gestion;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    // Aquí está la magia para que Swagger no pida el ID al insertar
-    @JsonIgnore
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getCodcont() {
         return codcont;
     }
 
+    @JsonIgnore
     public void setCodcont(Integer codcont) {
         this.codcont = codcont;
+    }
+
+    public Integer getPartida() {
+        return partida;
+    }
+
+    public void setPartida(Integer partida) {
+        this.partida = partida;
     }
 
     public Integer getGestion() {
