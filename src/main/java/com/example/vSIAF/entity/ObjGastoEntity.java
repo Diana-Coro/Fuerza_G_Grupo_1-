@@ -1,48 +1,48 @@
 package com.example.vSIAF.entity;
- 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
- 
+
 @Entity
 @Table(name = "objgasto")
 public class ObjGastoEntity {
- 
+
     @Id
-    private String partida;
-    private Integer gestion;
-    private String descrip;
- 
+    private String Partida;
+    private Integer Gestion;
+    private String Descrip;
+
     public ObjGastoEntity() {
     }
- 
-    public ObjGastoEntity(String partida, Integer gestion, String descrip) {
-        this.partida = partida;
-        this.gestion = gestion;
-        this.descrip = descrip;
+
+    public ObjGastoEntity(String Partida, Integer Gestion, String Descrip) {
+        this.Partida = Partida;
+        this.Gestion = Gestion;
+        this.Descrip = Descrip;
     }
- 
+
     public String getPartida() {
-        return partida;
+        return Partida;
     }
- 
-    public void setPartida(String partida) {
-        this.partida = partida;
+
+    public void setPartida(String Partida) {
+        this.Partida = Partida;
     }
- 
+
     public Integer getGestion() {
-        return gestion;
+        return Gestion;
     }
- 
-    public void setGestion(Integer gestion) {
-        this.gestion = gestion;
+
+    public void setGestion(Integer Gestion) {
+        this.Gestion = Gestion;
     }
- 
+
     public String getDescrip() {
-        return descrip;
+        return Descrip;
     }
- 
-    public void setDescrip(String descrip) {
-        this.descrip = descrip;
+
+    public void setDescrip(String Descrip) {
+        this.Descrip = Descrip;
     }
 }
