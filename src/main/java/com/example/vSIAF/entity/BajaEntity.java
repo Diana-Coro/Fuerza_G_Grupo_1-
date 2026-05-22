@@ -3,27 +3,30 @@ package com.example.vSIAF.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "baja")
+@Table(name = "Baja")
 public class BajaEntity {
 
     @Id
-    private Long codbaja;
+    private Integer codbaja;
+    
 
     private String desbaja;
+
 
     public BajaEntity() {
     }
 
-    public BajaEntity(Long codbaja, String desbaja) {
+
+    public BajaEntity(Integer codbaja, String desbaja) {
         this.codbaja = codbaja;
         this.desbaja = desbaja;
     }
 
-    public Long getCodbaja() {
+    public Integer getCodbaja() {
         return codbaja;
     }
 
-    public void setCodbaja(Long codbaja) {
+    public void setCodbaja(Integer codbaja) {
         this.codbaja = codbaja;
     }
 
