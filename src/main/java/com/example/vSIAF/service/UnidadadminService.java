@@ -23,26 +23,26 @@ public class UnidadadminService {
         return repository.findById(unidad).orElse(null);
     }
 
-    public UnidadadminEntity crear(UnidadadminEntity unidadAdmin) {
-        return repository.save(unidadAdmin);
+    public UnidadadminEntity crear(UnidadadminEntity unidadadmin) {
+        return repository.save(unidadadmin);
     }
 
-    public UnidadadminEntity actualizar(Long unidad, UnidadadminEntity unidadAdmin) {
+    public UnidadadminEntity actualizar(Long unidad, UnidadadminEntity unidadadmin) {
         UnidadadminEntity existente = repository.findById(unidad).orElse(null);
 
         if (existente == null) {
             return null;
         }
 
-        existente.setEntidad(unidadAdmin.getEntidad());
-        existente.setDescrip(unidadAdmin.getDescrip());
-        existente.setCiudad(unidadAdmin.getCiudad());
+        existente.setEntidad(unidadadmin.getEntidad());
+        existente.setDescrip(unidadadmin.getDescrip());
+        existente.setCiudad(unidadadmin.getCiudad());
 
         return repository.save(existente);
     }
 
     public String eliminar(Long unidad) {
         repository.deleteById(unidad);
-        return "Unidad administrativa eliminada correctamente";
+        return "Unidadadmin eliminada correctamente";
     }
 }

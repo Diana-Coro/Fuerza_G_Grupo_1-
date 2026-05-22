@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/unidadadmin")
-@Tag(name = "UnidadAdmin API", description = "CRUD de la tabla Unidad Administrativa")
+@Tag(name = "Unidadadmin API", description = "CRUD de la tabla Unidadadmin")
 public class UnidadadminController {
 
     private final UnidadadminService service;
@@ -22,7 +22,7 @@ public class UnidadadminController {
     }
 
     @Operation(
-            summary = "Lista de unidades administrativas",
+            summary = "Lista de unidadadmin",
             description = "Obtiene todas las unidades administrativas registradas"
     )
     @GetMapping
@@ -31,7 +31,7 @@ public class UnidadadminController {
     }
 
     @Operation(
-            summary = "Buscar unidad administrativa",
+            summary = "Buscar unidadadmin",
             description = "Obtiene una unidad administrativa mediante su código"
     )
     @GetMapping("/{unidad}")
@@ -40,36 +40,24 @@ public class UnidadadminController {
     }
 
     @Operation(
-            summary = "Registrar unidad administrativa",
+            summary = "Registrar unidadadmin",
             description = "Registra una nueva unidad administrativa"
     )
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Ejemplos para registrar una unidad administrativa",
+            description = "Ejemplo para registrar unidadadmin",
             required = true,
             content = @Content(
                     mediaType = "application/json",
                     examples = {
                             @ExampleObject(
-                                    name = "Ejemplo Potosí",
-                                    summary = "Unidad administrativa de Potosí",
+                                    name = "Ejemplo Registro",
+                                    summary = "Registro de unidadadmin",
                                     value = """
                                             {
-                                              "entidad": "Gobierno Autónomo Municipal",
-                                              "unidad": "UA-101",
-                                              "descripcion": "Unidad administrativa central",
+                                              "entidad": 1,
+                                              "unidad": 101,
+                                              "descrip": "Unidad administrativa central",
                                               "ciudad": "Potosí"
-                                            }
-                                            """
-                            ),
-                            @ExampleObject(
-                                    name = "Ejemplo Sucre",
-                                    summary = "Unidad administrativa financiera",
-                                    value = """
-                                            {
-                                              "entidad": "Gobernación Departamental",
-                                              "unidad": "UA-202",
-                                              "descripcion": "Unidad administrativa financiera",
-                                              "ciudad": "Sucre"
                                             }
                                             """
                             )
@@ -77,40 +65,28 @@ public class UnidadadminController {
             )
     )
     @PostMapping
-    public UnidadadminEntity crear(@RequestBody UnidadadminEntity unidadAdmin) {
-        return service.crear(unidadAdmin);
+    public UnidadadminEntity crear(@RequestBody UnidadadminEntity unidadadmin) {
+        return service.crear(unidadadmin);
     }
 
     @Operation(
-            summary = "Actualizar unidad administrativa",
+            summary = "Actualizar unidadadmin",
             description = "Modifica una unidad administrativa existente"
     )
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Ejemplos para actualizar una unidad administrativa",
+            description = "Ejemplo para actualizar unidadadmin",
             required = true,
             content = @Content(
                     mediaType = "application/json",
                     examples = {
                             @ExampleObject(
-                                    name = "Actualizar Potosí",
-                                    summary = "Actualización de unidad central",
+                                    name = "Ejemplo Actualización",
+                                    summary = "Actualización de unidadadmin",
                                     value = """
                                             {
-                                              "entidad": "Gobierno Autónomo Municipal",
-                                              "unidad": "UA-101",
-                                              "descripcion": "Unidad administrativa central actualizada",
-                                              "ciudad": "Potosí"
-                                            }
-                                            """
-                            ),
-                            @ExampleObject(
-                                    name = "Actualizar La Paz",
-                                    summary = "Actualización de unidad financiera",
-                                    value = """
-                                            {
-                                              "entidad": "Ministerio de Economía",
-                                              "unidad": "UA-303",
-                                              "descripcion": "Unidad financiera actualizada",
+                                              "entidad": 1,
+                                              "unidad": 101,
+                                              "descrip": "Unidad administrativa actualizada",
                                               "ciudad": "La Paz"
                                             }
                                             """
@@ -121,13 +97,13 @@ public class UnidadadminController {
     @PutMapping("/{unidad}")
     public UnidadadminEntity actualizar(
             @PathVariable Long unidad,
-            @RequestBody UnidadadminEntity unidadAdmin
+            @RequestBody UnidadadminEntity unidadadmin
     ) {
-        return service.actualizar(unidad, unidadAdmin);
+        return service.actualizar(unidad, unidadadmin);
     }
 
     @Operation(
-            summary = "Eliminar unidad administrativa",
+            summary = "Eliminar unidadadmin",
             description = "Elimina una unidad administrativa mediante su código"
     )
     @DeleteMapping("/{unidad}")
