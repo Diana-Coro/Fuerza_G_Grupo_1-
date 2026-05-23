@@ -104,4 +104,22 @@ public class MesController {
     public void eliminar(@PathVariable Integer id) {
         mesService.eliminar(id);
     }
+
+    // NUEVO ENDPOINT PARA RESETEAR/CORREGIR TODOS LOS MESES
+    @Operation(
+            summary = "Resetear todos los meses",
+            description = "Corrige todos los meses con sus nombres correctos (Enero a Diciembre)."
+    )
+    @PostMapping("/reset-meses")
+    public String resetMeses() {
+        String[] nombres = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+                            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+        
+        for (int i = 0; i < nombres.length; i++) {
+            MesEntity mes = new MesEntity(i + 1, nombres[i]);
+            mesService.guardar(mes);
+        }
+        
+        return "Meses reiniciados correctamente. Se procesaron " + nombres.length + " meses.";
+    }
 }
