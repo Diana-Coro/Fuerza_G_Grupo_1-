@@ -54,8 +54,8 @@ public class MesController {
                             examples = @ExampleObject(
                                     value = """
                                             {
-                                              "Mes": 1,
-                                              "Nommes": "Enero"
+                                              "mes": 1,
+                                              "nommes": "Enero"
                                             }
                                             """
                             )
@@ -83,8 +83,8 @@ public class MesController {
                             examples = @ExampleObject(
                                     value = """
                                             {
-                                              "Mes": 1,
-                                              "Nommes": "Enero Actualizado"
+                                              "mes": 1,
+                                              "nommes": "Enero Actualizado"
                                             }
                                             """
                             )
